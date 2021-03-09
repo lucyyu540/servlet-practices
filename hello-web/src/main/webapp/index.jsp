@@ -14,5 +14,9 @@
 	<%
 		}
 	%>
+	<a href="tag.jsp">tag.jsp link</a>
+	<br/>
+	<a href="tag.jsp" target='_blank'>tag.jsp link</a>
+	<br/>
 </body>
 </html>

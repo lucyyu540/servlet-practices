@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Tag</title>
 </head>
 <body>
 	<h1>Heading h1</h1>
@@ -40,6 +40,8 @@
 	<a href="/hello-web/hello">hello-web/hello link</a>
 	<br/>
 	<a href="/hello-web/index.jsp">go to main link</a>
+	<br/>
+	<a href="/hello-web/form.jsp">go to form link</a>
 	<br/>
 	
 	<p>BLAH BLAH BLHA <br/> LFKDJLKDJSLFKJDL </p>

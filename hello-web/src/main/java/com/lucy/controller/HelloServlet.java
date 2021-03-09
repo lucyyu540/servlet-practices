@@ -18,7 +18,6 @@ public class HelloServlet extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		/*body*/
 		pw.print("<h1> hellooooo 안녕~!</h1>");
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	

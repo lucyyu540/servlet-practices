@@ -9,9 +9,11 @@
 	</parent>
 	<artifactId>hello-web</artifactId>
 	<packaging>war</packaging>
+	<dependencies>
+	</dependencies>
+	
 	<build>
 		<finalName>hello-web</finalName>
-		<sourceDirectory>src/main/java</sourceDirectory>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
@@ -36,9 +38,8 @@
 					<warSourceDirectory>src/main/webapp</warSourceDirectory>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
-
 			</plugin>
 		</plugins>
-	</build>
+	</build>		
 
 </project>

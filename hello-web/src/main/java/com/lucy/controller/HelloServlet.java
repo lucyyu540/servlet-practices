@@ -1,6 +1,8 @@
 package com.lucy.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +13,11 @@ public class HelloServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().print("<h1> helloooooo</h1>");
+		/*head*/
+		response.setContentType("text/html; charset=utf-8");//kor character settings
+		PrintWriter pw = response.getWriter();
+		/*body*/
+		pw.print("<h1> hellooooo 안녕~!</h1>");
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 

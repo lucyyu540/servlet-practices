@@ -6,9 +6,7 @@
 	String no = request.getParameter("no");
 	
 	int number = -11;
-	if( no != null && no.matches("\\d*")){
-		number = Integer.parseInt(no);
-	}
+	if( no != null && no.matches("\\d*")) number = Integer.parseInt(no);
 %>
 <!DOCTYPE html>
 <html>

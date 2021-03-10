@@ -19,16 +19,14 @@ public class JoinServlet extends HttpServlet {
 		String[] hobbies = request.getParameterValues("hobbies");
 		String gender = request.getParameter("gender");
 		String intro = request.getParameter("intro");
+		
 		System.out.println(email);
 		System.out.println(password);
 		System.out.println(birthYear);
 		System.out.println(gender);
-		if( hobbies != null ) {
-			for(String hobby : hobbies) {
-				System.out.println(hobby);
-			}
-		}
+		if( hobbies != null ) for(String hobby : hobbies) System.out.println(hobby);
 		System.out.println(intro);
+		
 		response.setContentType("text/html; charset=utf-8");//kor character setting;
 		PrintWriter pw = response.getWriter();
 		pw.print("ok");

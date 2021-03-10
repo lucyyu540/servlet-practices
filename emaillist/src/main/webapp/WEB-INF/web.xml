@@ -19,4 +19,14 @@
     <servlet-name>AddServlet</servlet-name>
     <url-pattern>/add</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LoadServlet</display-name>
+    <servlet-name>LoadServlet</servlet-name>
+    <servlet-class>com.lucy.controller.LoadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoadServlet</servlet-name>
+    <url-pattern>/load</url-pattern>
+  </servlet-mapping>
 </web-app>

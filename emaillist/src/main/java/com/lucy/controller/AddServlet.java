@@ -1,6 +1,8 @@
 package com.lucy.controller;
 
+import java.util.List;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,8 +19,7 @@ public class AddServlet extends HttpServlet {
 	private Dao dao = new Dao();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,7 +27,7 @@ public class AddServlet extends HttpServlet {
 		String lastname = request.getParameter("ln");
 		String email = request.getParameter("email");
 		dao.create(new EmailListVo(firstname, lastname, email));
-		doGet(request, response);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 }

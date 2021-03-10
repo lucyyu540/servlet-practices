@@ -17,13 +17,12 @@ public class AddServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-System.out.println("ADD SERVLET DO POST");
 		
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
 		String etc = request.getParameter("etc");
-		
-		dao.create(new GuestVo(name, password, etc));
+		//name and password must not be null
+		if(name!= null && password != null) dao.create(new GuestVo(name, password, etc));
 		
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}

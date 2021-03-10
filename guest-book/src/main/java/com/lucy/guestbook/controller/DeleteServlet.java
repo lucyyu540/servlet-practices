@@ -16,14 +16,12 @@ public class DeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String password = request.getParameter("password");
 		int id = Integer.parseInt(request.getParameter("id"));
-		dao.delete(id);
+		System.out.println(id + " " + password);
+		//check password then delete
+		if(dao.authenticate(id, password)) dao.delete(id);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 
 	}

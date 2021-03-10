@@ -41,7 +41,26 @@ public class Dao {
 	public void update(GuestVo e) {
 		
 	}
-	public void select(int idemaillist) {
+	public boolean authenticate(int id, String pw) {
+		Connection con=null;
+		try {
+			con = DatabaseConnection.initializeDatabase();
+			String s = "select password from guestbook where idguestbook = ?";
+	        PreparedStatement st = con.prepareStatement(s); 
+	        st.setInt(1, id);
+	        ResultSet rs = st.executeQuery(); 
+	        rs.next();
+	        String password = rs.getString(1);
+	        st.close(); 
+	        con.close();
+	        if(password.equals(pw)) return true;
+	        return false;
+
+		} catch (Exception ex) {
+			System.out.println("dao authenticate " + ex.getMessage());
+			return false;
+		}
+		
 		
 	}
 	public List<GuestVo> selectAll() {

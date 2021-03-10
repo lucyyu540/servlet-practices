@@ -14,10 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-/**
- * Servlet implementation class AddServlet
- */
 @WebServlet("/add")
 public class AddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -38,7 +34,7 @@ public class AddServlet extends HttpServlet {
 		String[] res = {name, password, etc, date};
 		list.add(res);
 		request.setAttribute("guests", list);
-		getServletContext().getRequestDispatcher("guestbook").forward(request, response);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 				
 	}
 

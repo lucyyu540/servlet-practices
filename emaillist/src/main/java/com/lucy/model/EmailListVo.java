@@ -8,7 +8,10 @@ public class EmailListVo {
 	
 	/*CONSTRUCTOR*/
 	public EmailListVo(int idemaillist, String firstname, String lastname, String email) {
+		this(firstname, lastname, email);
 		this.idemaillist=idemaillist;
+	}
+	public EmailListVo(String firstname, String lastname, String email) {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
@@ -40,7 +43,7 @@ public class EmailListVo {
 	}
 	@Override
 	public String toString() {
-		return "Entry [idemaillist=" + idemaillist + ", firstname=" + firstname + ", lastname=" + lastname + ", email="
+		return "EmailVo [idemaillist=" + idemaillist + ", firstname=" + firstname + ", lastname=" + lastname + ", email="
 				+ email + "]";
 	}
 

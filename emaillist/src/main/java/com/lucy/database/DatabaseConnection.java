@@ -12,14 +12,13 @@ public class DatabaseConnection {
         // Initialize all the information regarding 
         // Database Connection 
         String dbDriver = "com.mysql.cj.jdbc.Driver"; 
-        String dbURL = "jdbc:mysql://localhost:3306?serverTimezone=UTC"; 
+        String dbURL = "jdbc:mysql://localhost:3306/bitServlet?characterEncoding=utf8&serverTimezone=UTC&useSSL=false"; 
         // Database name to access 
-        String dbName = "bitServlet"; 
         String dbUsername = "root"; 
         String dbPassword = "password"; 
   
         Class.forName(dbDriver); 
-        Connection con = DriverManager.getConnection(dbURL + dbName, 
+        Connection con = DriverManager.getConnection(dbURL, 
                                                      dbUsername,  
                                                      dbPassword); 
         return con; 

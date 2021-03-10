@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8" import="java.util.ArrayList"%>
 
 <%
-//ArrayList<String[]> guests = new ArrayList<String[]>();
 ArrayList<String[]> guests = (ArrayList<String[]>) session.getAttribute("guests");
 if (guests == null) {
 	guests = new ArrayList<String[]>();
@@ -42,11 +41,7 @@ if (guests == null) {
 					<td width="5%"><%=i + 1%></td>
 					<td><%=guests.get(i)[0]%></td> <%--name --%>
 					<td><%=guests.get(i)[3]%></td> <%-- date--%>
-					<td>
-						<form action="/guestbook/delete" method='post'>
-							<input type='submit' name=<%=i%> value='삭제' />
-						</form>
-					</td>
+					<td> <a href="deleteform.jsp?id=<%=i%>">삭제</a></td>										
 				</tr>
 				<tr>
 					<td colspan="4"><%=guests.get(i)[2]%></td> <%--text--%>

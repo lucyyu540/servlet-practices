@@ -11,7 +11,7 @@ int id = Integer.parseInt(request.getParameter("id"));
 <title>방명록</title>
 </head>
 <body>
-	<form method="post" action="/guestbook/delete">
+	<form method="post" action="/guest-book/delete">
 	<input type='hidden' name="id" value="">
 	<table>
 		<tr>

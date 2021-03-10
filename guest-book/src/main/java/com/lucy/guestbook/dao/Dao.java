@@ -10,7 +10,7 @@ import com.lucy.guestbook.database.DatabaseConnection;
 import com.lucy.guestbook.model.GuestVo;
 
 public class Dao {
-	public void create(GuestVo g) {
+	public boolean create(GuestVo g) {
 		try {
 			Connection con = DatabaseConnection.initializeDatabase();
 			String s = "insert into guestbook (name, password, text) values(?, ?, ?)";
@@ -20,47 +20,39 @@ public class Dao {
 	        st.setString(2, g.getPassword()); 
 	        st.setString(3, g.getText());
 	        
-	        st.executeUpdate(); 
+	        int r = st.executeUpdate(); 
 	        st.close(); 
 	        con.close();
-
-		} catch (Exception ex) {System.out.println("dao create "+ ex.getMessage());} 
-		
-	}
-	public void delete(int id) {
-			try {
-				Connection con = DatabaseConnection.initializeDatabase();
-		        PreparedStatement st = con.prepareStatement("delete from guestbook where idguestbook=?"); 
-		        st.setInt(1, id); 
-		        st.executeUpdate(); 
-		        st.close(); 
-
-			} catch (Exception ex) {System.out.println("dao delete " + ex.getMessage());} 
-		
-	}
-	public void update(GuestVo e) {
-		
-	}
-	public boolean authenticate(int id, String pw) {
-		Connection con=null;
-		try {
-			con = DatabaseConnection.initializeDatabase();
-			String s = "select password from guestbook where idguestbook = ?";
-	        PreparedStatement st = con.prepareStatement(s); 
-	        st.setInt(1, id);
-	        ResultSet rs = st.executeQuery(); 
-	        rs.next();
-	        String password = rs.getString(1);
-	        st.close(); 
-	        con.close();
-	        if(password.equals(pw)) return true;
+	        if(r==1) return true;
 	        return false;
 
 		} catch (Exception ex) {
-			System.out.println("dao authenticate " + ex.getMessage());
+			System.out.println("dao create : ");
+			ex.printStackTrace();
 			return false;
-		}
+		} 
 		
+	}
+	public boolean delete(int id, String pw) {
+			try {
+				Connection con = DatabaseConnection.initializeDatabase();
+		        PreparedStatement st = con.prepareStatement("delete from guestbook where idguestbook=? and password=?"); 
+		        st.setInt(1, id); 
+		        st.setString(2, pw);
+		        int r = st.executeUpdate(); 
+		        st.close(); 
+		        con.close();
+		        if(r==1) return true;
+		        return false;
+
+			} catch (Exception ex) {
+				System.out.print("dao delete: ");
+				ex.printStackTrace();
+				return false;
+			} 
+		
+	}
+	public void update(GuestVo e) {
 		
 	}
 	public List<GuestVo> selectAll() {

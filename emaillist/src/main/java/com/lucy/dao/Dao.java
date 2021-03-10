@@ -9,7 +9,7 @@ import java.util.List;
 import com.lucy.database.DatabaseConnection;
 import com.lucy.model.EmailListVo;
 public class Dao {
-	public void create(EmailListVo e) {
+	public boolean create(EmailListVo e) {
 		try {
 			Connection con = DatabaseConnection.initializeDatabase();
 			String s = "insert into emaillist (firstname, lastname, email) values(?, ?, ?)";
@@ -19,11 +19,17 @@ public class Dao {
 	        st.setString(2, e.getLastname()); 
 	        st.setString(3, e.getEmail());
 	        
-	        st.executeUpdate(); 
+	        int r = st.executeUpdate(); 
 	        st.close(); 
 	        con.close();
+	        if(r ==1) return true;
+	        return false;
 
-		} catch (Exception ex) {System.out.println("dao create "+ ex.getMessage());} 
+		} catch (Exception ex) {
+			System.out.print("dao create :");
+			ex.printStackTrace();
+			return false;
+		} 
 		
 	}
 	public void delete(int idemaillist) {

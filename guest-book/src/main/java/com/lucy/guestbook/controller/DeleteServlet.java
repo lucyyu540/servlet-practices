@@ -21,7 +21,7 @@ public class DeleteServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		System.out.println(id + " " + password);
 		//check password then delete
-		if(dao.authenticate(id, password)) dao.delete(id);
+		dao.delete(id, password); 
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 
 	}

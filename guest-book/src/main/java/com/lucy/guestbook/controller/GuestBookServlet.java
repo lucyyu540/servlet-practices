@@ -38,14 +38,14 @@ public class GuestBookServlet extends HttpServlet {
 			//name and password must not be null
 			if(name!= null && password != null) new Dao().create(new GuestVo(name, password, etc));
 			//redirect
-			response.sendRedirect(request.getContextPath() + "/gbs");
+			response.sendRedirect(request.getContextPath());
 		}
 		else if(action.equals("delete")) {
 			int id = Integer.parseInt(request.getParameter("id"));
 			String password = request.getParameter("password");
 			new Dao().delete(id, password);
 			//redirect
-			response.sendRedirect(request.getContextPath() + "/gbs");
+			response.sendRedirect(request.getContextPath());
 		}
 		else {//default --> index.jsp
 			displayIndex(request,response);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-  <display-name>guest-book</display-name>
+  <display-name>guestbook02</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -17,10 +17,9 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>GuestBookServlet</servlet-name>
-    <url-pattern>/gbs</url-pattern>
-    <url-pattern>/gbs/</url-pattern>
-    <url-pattern>/gbs/form</url-pattern>
-    <url-pattern>/gbs/delete</url-pattern>
-    <url-pattern>/gbs/add</url-pattern>
+    <url-pattern>/</url-pattern>
+    <url-pattern>/form</url-pattern>
+    <url-pattern>/delete</url-pattern>
+    <url-pattern>/add</url-pattern>
   </servlet-mapping>
 </web-app>

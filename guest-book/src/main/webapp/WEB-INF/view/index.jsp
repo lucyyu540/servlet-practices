@@ -16,7 +16,7 @@ List<GuestVo> guests = (List<GuestVo>) request.getAttribute("guests");
 </head>
 <body>
 	<%--ADDING NEW GUEST --%>
-	<form action="/guest-book/gbs/add" method='post'>
+	<form action="/guestbook02/add" method='post'>
 		<table border="1">
 			<tr>
 				<td>이름 :</td>
@@ -44,7 +44,7 @@ List<GuestVo> guests = (List<GuestVo>) request.getAttribute("guests");
 					<td width="5%"><%=g.getIdguestbook() %></td>
 					<td><%=g.getName() %></td> <%--name --%>
 					<td><%=g.getDate() %></td> <%-- date--%>
-					<td> <a href="/guest-book/gbs/form?id=<%=g.getIdguestbook()%>">삭제</a></td>										
+					<td> <a href="/guestbook02/form?id=<%=g.getIdguestbook()%>">삭제</a></td>										
 				</tr>
 				<tr>
 					<td colspan="4"><%=g.getText() %></td> <%--text--%>

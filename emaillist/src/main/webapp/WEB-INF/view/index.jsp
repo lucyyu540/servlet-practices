@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.List" import="com.lucy.model.EmailListVo" import="com.lucy.dao.Dao"%>
 <%
-Dao dao = new Dao();
-List<EmailListVo> emails = dao.selectAll();
+List<EmailListVo> emails = (List<EmailListVo>) request.getAttribute("emails");
 %>
 <!DOCTYPE html>
 <html>
@@ -33,7 +32,7 @@ List<EmailListVo> emails = dao.selectAll();
 	<%} %>
 	<br>
 	<p>
-		<a href = "/emaillist/form.jsp">추가메일 등록</a>
+		<a href = "/emaillist/els/form">추가메일 등록</a>
 	</p>
 	<br>
 </body>

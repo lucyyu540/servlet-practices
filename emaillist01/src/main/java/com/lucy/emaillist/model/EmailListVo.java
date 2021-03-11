@@ -1,4 +1,4 @@
-package com.lucy.model;
+package com.lucy.emaillist.model;
 
 public class EmailListVo {
 	private int idemaillist;

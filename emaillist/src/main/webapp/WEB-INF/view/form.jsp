@@ -12,7 +12,7 @@
 		메일 리스트에 가입하려면,<br>
 		아래 항목을 기입하고 submit 버튼을 클릭하세요.
 	</p>
-	<form action="/emaillist/add" method="post">
+	<form action="/emaillist/els/add" method="post">
 	    First name: <input type="text" name="fn" value="" ><br>
 	    Last name: <input type="text" name="ln" value=""><br>
 	    Email address: <input type="text" name="email" value=""><br>
@@ -20,7 +20,7 @@
 	</form>
 	<br>
 	<p>
-		<a href = "index.jsp">리스트 바로가기</a>
+		<a href = "/emaillist/els/list">리스트 바로가기</a>
 	</p>
 </body>
 </html>

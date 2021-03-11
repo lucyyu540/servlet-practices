@@ -18,6 +18,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>EmailListServlet</servlet-name>
+    <url-pattern></url-pattern>
     <url-pattern>/els</url-pattern>
     <url-pattern>/els/</url-pattern>
     <url-pattern>/els/list</url-pattern>

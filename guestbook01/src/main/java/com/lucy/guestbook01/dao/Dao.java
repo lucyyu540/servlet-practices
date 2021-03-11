@@ -13,7 +13,7 @@ public class Dao {
 	public boolean create(GuestVo g) {
 		try {
 			Connection con = DatabaseConnection.initializeDatabase();
-			String s = "insert into guestbook (name, password, text) values(?, ?, ?)";
+			String s = "insert into guestbook (name, password, contents) values(?, ?, ?)";
 	        PreparedStatement st = con.prepareStatement(s); 
 
 	        st.setString(1, g.getName()); 
@@ -36,7 +36,7 @@ public class Dao {
 	public boolean delete(int id, String pw) {
 			try {
 				Connection con = DatabaseConnection.initializeDatabase();
-		        PreparedStatement st = con.prepareStatement("delete from guestbook where idguestbook=? and password=?"); 
+		        PreparedStatement st = con.prepareStatement("delete from guestbook where no=? and password=?"); 
 		        st.setInt(1, id); 
 		        st.setString(2, pw);
 		        int r = st.executeUpdate(); 
@@ -59,7 +59,7 @@ public class Dao {
 		Connection con=null;
 		try {
 			con = DatabaseConnection.initializeDatabase();
-			String s = "select idguestbook, name, text, date from guestbook order by idguestbook";
+			String s = "select no, name, contents, reg_date from guestbook order by reg_date";
 	        PreparedStatement st = con.prepareStatement(s); 
 	        ResultSet rs = st.executeQuery(); 
 	        List<GuestVo> res = new ArrayList<GuestVo>();
@@ -75,7 +75,8 @@ public class Dao {
 	        return res;
 
 		} catch (Exception ex) {
-			System.out.println("dao selectAll " + ex.getMessage());
+			System.out.println("dao selectAll ");
+			ex.printStackTrace();
 			return null;
 		}
 	}

@@ -14,7 +14,7 @@ public class Dao {
 	public boolean create(EmailListVo e) {
 		try {
 			Connection con = DatabaseConnection.initializeDatabase();
-			String s = "insert into emaillist (firstname, lastname, email) values(?, ?, ?)";
+			String s = "insert into emaillist (first_name, last_name, email) values(?, ?, ?)";
 	        PreparedStatement st = con.prepareStatement(s); 
 
 	        st.setString(1, e.getFirstname()); 
@@ -37,7 +37,7 @@ public class Dao {
 	public void delete(int idemaillist) {
 			try {
 				Connection con = DatabaseConnection.initializeDatabase();
-		        PreparedStatement st = con.prepareStatement("delete from emaillist where idemaillist=?"); 
+		        PreparedStatement st = con.prepareStatement("delete from emaillist where no=?"); 
 		        st.setInt(1, idemaillist); 
 		        st.executeUpdate(); 
 		        st.close(); 
@@ -55,7 +55,7 @@ public class Dao {
 		Connection con=null;
 		try {
 			con = DatabaseConnection.initializeDatabase();
-			String s = "select idemaillist, firstname, lastname, email from emaillist order by idemaillist";
+			String s = "select no, first_name, last_name, email from emaillist order by no";
 	        PreparedStatement st = con.prepareStatement(s); 
 	        ResultSet rs = st.executeQuery(); 
 	        List<EmailListVo> res = new ArrayList<EmailListVo>();

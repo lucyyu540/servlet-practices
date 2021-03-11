@@ -12,6 +12,7 @@
 		<module>emaillist</module>
 		<module>guest-book</module>
 		<module>emaillist01</module>
+		<module>guestbook01</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -1,4 +1,4 @@
-package com.lucy.emaillist.dao;
+package com.lucy.emaillist01.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.lucy.emaillist.database.DatabaseConnection;
-import com.lucy.emaillist.model.EmailListVo;
+import com.lucy.emaillist01.database.DatabaseConnection;
+import com.lucy.emaillist01.model.EmailListVo;
 
 public class Dao {
 	public boolean create(EmailListVo e) {

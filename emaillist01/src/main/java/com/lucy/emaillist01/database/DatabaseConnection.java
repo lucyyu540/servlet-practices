@@ -1,4 +1,4 @@
-package com.lucy.emaillist.database;
+package com.lucy.emaillist01.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

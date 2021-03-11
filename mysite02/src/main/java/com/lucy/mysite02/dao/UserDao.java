@@ -53,18 +53,19 @@ public class UserDao {
 			} 
 		
 	}
-	public boolean update(UserVo u) {
+	public boolean update(UserVo u, int id, String password) {
 		try {
 			Connection con = DatabaseConnection.initializeDatabase();
 			String s = "update user set name = ?, email = ?, password = ?, gender = ? where no = ? and password = ?";
 	        PreparedStatement st = con.prepareStatement(s); 
-
+	        //updated info
 	        st.setString(1, u.getName()); 
 	        st.setString(2, u.getEmail()); 
 	        st.setString(3, u.getPassword());
 	        st.setString(4, u.getGender());
-	        st.setInt(5, u.getNo());
-	        st.setString(6, u.getPassword());
+	        //authenticate
+	        st.setInt(5, id);
+	        st.setString(6, password);
 	        
 	        int r = st.executeUpdate(); 
 	        st.close(); 

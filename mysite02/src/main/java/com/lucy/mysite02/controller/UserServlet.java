@@ -31,9 +31,12 @@ public class UserServlet extends HttpServlet {
 			//save to db
 			new UserDao().create(new UserVo(name, email, password, gender));
 			//redirect
-			response.sendRedirect(request.getContextPath());
-			request.getRequestDispatcher("/WEB-INF/view/main/index.jsp").forward(request, response);;
+			response.sendRedirect(request.getContextPath()+"/user/joinsuccess");
 		}
+		else if(action.equals("joinsuccess")) {
+			request.getRequestDispatcher("/WEB-INF/view/user/joinsuccess.jsp").forward(request, response);;
+		}
+		
 		else if(action.equals("loginform")) {
 			request.getRequestDispatcher("/WEB-INF/view/user/loginform.jsp").forward(request, response);;
 		}

@@ -3,19 +3,19 @@ package com.lucy.mysite02.model;
 public class GuestVo {
 	private String name;
 	private String password;
-	private int idguestbook;
-	private String text;
-	private String date;
+	private int no;
+	private String contents;
+	private String reg_date;
 	public GuestVo(String name, String password, String text) {
 		this.name = name;
 		this.password = password;
-		this.text = text;
+		this.contents = text;
 	}
 	public GuestVo(int id, String name2, String text2, String date2) {
-		this.idguestbook=id;
+		this.no=id;
 		this.name = name2;
-		this.text = text2;
-		this.date = date2;
+		this.contents = text2;
+		this.reg_date = date2;
 	}
 	public String getName() {
 		return name;
@@ -29,23 +29,24 @@ public class GuestVo {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getIdguestbook() {
-		return idguestbook;
+	public int getNo() {
+		return no;
 	}
-	public void setIdguestbook(int idguestbook) {
-		this.idguestbook = idguestbook;
+	public void setNo(int no) {
+		this.no = no;
 	}
-	public String getText() {
-		return text;
+	public String getContents() {
+		return contents;
 	}
-	public void setText(String text) {
-		this.text = text;
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
-	public String getDate() {
-		return date;
+	public String getReg_date() {
+		return reg_date;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
 	}
+
 
 }

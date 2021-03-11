@@ -35,6 +35,7 @@
 		<url-pattern>/user/login</url-pattern>
 		<url-pattern>/user/joinform</url-pattern>
 		<url-pattern>/user/join</url-pattern>
+		<url-pattern>/user/joinsuccess</url-pattern>
 		<url-pattern>/user/logout</url-pattern>
 		<url-pattern>/user/updateform</url-pattern>
 	</servlet-mapping>
@@ -47,6 +48,10 @@
 	<servlet-mapping>
 		<servlet-name>GuestBookServlet</servlet-name>
 		<url-pattern>/guestbook</url-pattern>
+		<url-pattern>/guestbook/deleteform</url-pattern>
+		<url-pattern>/guestbook/delete</url-pattern>
+		<url-pattern>/guestbook/add</url-pattern>
+
 	</servlet-mapping>
 	<servlet>
 		<description></description>

@@ -2,14 +2,11 @@
 	pageEncoding="UTF-8" 
 	import="java.util.List" 
 	import="com.lucy.guestbook.dao.Dao" 
-	import="com.lucy.guestbook.model.GuestVo" 
-	import="java.util.ArrayList" %>
+	import="com.lucy.guestbook.model.GuestVo"  %>
 	
 <%--LOAD GUEST LIST FROM DB--%>
 <%
-Dao dao = new Dao();
-List<GuestVo> guests = dao.selectAll();
-if(guests == null) guests = new ArrayList<GuestVo>();
+List<GuestVo> guests = (List<GuestVo>) request.getAttribute("guests");
 %>
 <!DOCTYPE html>
 <html>
@@ -19,7 +16,7 @@ if(guests == null) guests = new ArrayList<GuestVo>();
 </head>
 <body>
 	<%--ADDING NEW GUEST --%>
-	<form action="/guest-book/add" method='post'>
+	<form action="/guest-book/gbs/add" method='post'>
 		<table border="1">
 			<tr>
 				<td>이름 :</td>
@@ -47,7 +44,7 @@ if(guests == null) guests = new ArrayList<GuestVo>();
 					<td width="5%"><%=g.getIdguestbook() %></td>
 					<td><%=g.getName() %></td> <%--name --%>
 					<td><%=g.getDate() %></td> <%-- date--%>
-					<td> <a href="deleteform.jsp?id=<%=g.getIdguestbook()%>">삭제</a></td>										
+					<td> <a href="/guest-book/gbs/form?id=<%=g.getIdguestbook()%>">삭제</a></td>										
 				</tr>
 				<tr>
 					<td colspan="4"><%=g.getText() %></td> <%--text--%>

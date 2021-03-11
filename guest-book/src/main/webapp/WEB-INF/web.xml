@@ -11,22 +11,16 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>AddServlet</display-name>
-    <servlet-name>AddServlet</servlet-name>
-    <servlet-class>com.lucy.guestbook.controller.AddServlet</servlet-class>
+    <display-name>GuestBookServlet</display-name>
+    <servlet-name>GuestBookServlet</servlet-name>
+    <servlet-class>com.lucy.guestbook.controller.GuestBookServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AddServlet</servlet-name>
-    <url-pattern>/add</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>DeleteServlet</display-name>
-    <servlet-name>DeleteServlet</servlet-name>
-    <servlet-class>com.lucy.guestbook.controller.DeleteServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>DeleteServlet</servlet-name>
-    <url-pattern>/delete</url-pattern>
+    <servlet-name>GuestBookServlet</servlet-name>
+    <url-pattern>/gbs</url-pattern>
+    <url-pattern>/gbs/</url-pattern>
+    <url-pattern>/gbs/form</url-pattern>
+    <url-pattern>/gbs/delete</url-pattern>
+    <url-pattern>/gbs/add</url-pattern>
   </servlet-mapping>
 </web-app>

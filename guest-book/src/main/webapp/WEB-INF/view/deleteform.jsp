@@ -11,14 +11,14 @@ int id = Integer.parseInt(request.getParameter("id"));
 <title>방명록</title>
 </head>
 <body>
-	<form method="post" action="/guest-book/delete?id=<%=id%>">
+	<form method="post" action="/guest-book/gbs/delete?id=<%=id%>">
 	<input type='hidden' name="id" value="">
 	<table>
 		<tr>
 			<td>비밀번호</td>
 			<td><input type="password" name="password"></td>
 			<td><input type="submit" value="확인"></td>
-			<td><a href="index.jsp">메인으로 돌아가기</a></td>
+			<td><a href="/guest-book/gbs">메인으로 돌아가기</a></td>
 		</tr>
 	</table>
 	</form>

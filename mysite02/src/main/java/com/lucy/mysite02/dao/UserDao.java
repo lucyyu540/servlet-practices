@@ -80,8 +80,29 @@ public class UserDao {
 		} 
 		
 	}
-	public UserVo select() {
-		return null;
+	public UserVo select(String email, String password) {
+		Connection con=null;
+		try {
+			con = DatabaseConnection.initializeDatabase();
+			String s = "select no, name, gender, join_date from user where email=? and password = ?";
+	        PreparedStatement st = con.prepareStatement(s); 
+	        st.setString(1, email);
+	        st.setString(2, password);
+	        ResultSet rs = st.executeQuery(); 
+	        rs.next();
+	        	int no = rs.getInt(1);
+	        	String name = rs.getString(2);
+	        	String gender = rs.getString(4);
+	        	String join_date = rs.getString(5);
+	        st.close(); 
+	        con.close();
+	        return new UserVo(no, name, email, gender, join_date);
+
+		} catch (Exception ex) {
+			System.out.print("user dao select error : ");
+			ex.printStackTrace();
+			return null;
+		}
 		
 	}
 	public List<UserVo> selectAll() {

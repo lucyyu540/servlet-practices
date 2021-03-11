@@ -41,8 +41,10 @@ public class UserServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/view/user/loginform.jsp").forward(request, response);;
 		}
 		else if(action.equals("login")) {
-			
-			request.getSession().setAttribute("user", null);
+			String email = request.getParameter("email");
+			String pw = request.getParameter("password");
+			UserVo u = new UserDao().select(email, pw);
+			request.getSession().setAttribute("user", u);
 			request.getRequestDispatcher("/WEB-INF/view/main/index.jsp").forward(request, response);;
 		}
 		else if(action.equals("updateform")) {

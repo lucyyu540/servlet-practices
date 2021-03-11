@@ -12,7 +12,7 @@ import com.lucy.mysite02.dao.GuestBookDao;
 import com.lucy.mysite02.model.GuestVo;
 
 //response.sendRedirect(request.getContextPath());
-//request.getRequestDispatcher("/WEB-INF/view/user/loginform.jsp").forward(request, response);;
+//request.getRequestDispatcher("/WEB-INF/view/user/loginform.jsp").forward(request, response);
 public class GuestBookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

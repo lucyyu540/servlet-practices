@@ -24,7 +24,7 @@ public class EmailListServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//request.setCharacterEncoding("charset=utf-8");
+		request.setCharacterEncoding("utf-8");
 		String[] actions = request.getRequestURI().split("/");
 		String action = actions[actions.length-1];
 		if(action.equals("form")) {
@@ -35,7 +35,8 @@ public class EmailListServlet extends HttpServlet {
 			String lastname = request.getParameter("ln");
 			String email = request.getParameter("email");
 			if(firstname != null && lastname != null && email != null) new Dao().create(new EmailListVo(firstname, lastname, email));
-			displayIndex(request, response);
+			//redirect
+			WebUtil.redirect(request.getContextPath() + "/els", request, response);
 		}
 		else {//default --> index.jsp
 			displayIndex(request,response);

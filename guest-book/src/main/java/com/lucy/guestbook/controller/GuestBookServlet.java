@@ -24,9 +24,9 @@ public class GuestBookServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/index.jsp");
 		rd.forward(request, response);
 	}
-
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//request.setCharacterEncoding("charset=utf-8");
+		request.setCharacterEncoding("utf-8");
 		String[] actions = request.getRequestURI().split("/");
 		String action = actions[actions.length-1];
 		if(action.equals("form")) {

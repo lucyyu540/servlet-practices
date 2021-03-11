@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.List" import="com.lucy.model.EmailListVo" import="com.lucy.dao.Dao"%>
+    pageEncoding="UTF-8" 
+    import="java.util.List" 
+    import="com.lucy.emaillist.model.EmailListVo"
+     import="com.lucy.emaillist.dao.Dao"%>
 <%
 List<EmailListVo> emails = (List<EmailListVo>) request.getAttribute("emails");
 %>

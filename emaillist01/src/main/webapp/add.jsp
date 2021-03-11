@@ -4,7 +4,7 @@
     import="com.lucy.emaillist01.model.EmailListVo"
     %>
 <%
-//request.setCharacterEncoding("utf-8");
+request.setCharacterEncoding("utf-8");
 
 String fn = request.getParameter("fn");
 String ln = request.getParameter("ln");

@@ -14,11 +14,12 @@
     <description></description>
     <display-name>EmailListServlet</display-name>
     <servlet-name>EmailListServlet</servlet-name>
-    <servlet-class>com.lucy.controller.EmailListServlet</servlet-class>
+    <servlet-class>com.lucy.emaillist.controller.EmailListServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>EmailListServlet</servlet-name>
     <url-pattern>/els</url-pattern>
+    <url-pattern>/els/</url-pattern>
     <url-pattern>/els/list</url-pattern>
     <url-pattern>/els/form</url-pattern>
     <url-pattern>/els/add</url-pattern>

@@ -21,8 +21,7 @@ public class GuestBookServlet extends HttpServlet {
 		List<GuestVo> l = new Dao().selectAll();
 		request.setAttribute("guests", l);
 		//forwarding (request dispatch = req extension)
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/index.jsp");
-		rd.forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(request, response);;
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,8 +29,7 @@ public class GuestBookServlet extends HttpServlet {
 		String[] actions = request.getRequestURI().split("/");
 		String action = actions[actions.length-1];
 		if(action.equals("form")) {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/deleteform.jsp");
-			rd.forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/view/deleteform.jsp").forward(request, response);;
 		}
 		else if(action.equals("add")) {
 			String name = request.getParameter("name");
@@ -39,13 +37,15 @@ public class GuestBookServlet extends HttpServlet {
 			String etc = request.getParameter("etc");
 			//name and password must not be null
 			if(name!= null && password != null) new Dao().create(new GuestVo(name, password, etc));
-			displayIndex(request, response);
+			//redirect
+			response.sendRedirect(request.getContextPath() + "/gbs");
 		}
 		else if(action.equals("delete")) {
 			int id = Integer.parseInt(request.getParameter("id"));
 			String password = request.getParameter("password");
 			new Dao().delete(id, password);
-			displayIndex(request, response);
+			//redirect
+			response.sendRedirect(request.getContextPath() + "/gbs");
 		}
 		else {//default --> index.jsp
 			displayIndex(request,response);

@@ -89,14 +89,17 @@ public class UserDao {
 	        st.setString(1, email);
 	        st.setString(2, password);
 	        ResultSet rs = st.executeQuery(); 
-	        rs.next();
-	        	int no = rs.getInt(1);
-	        	String name = rs.getString(2);
-	        	String gender = rs.getString(4);
-	        	String join_date = rs.getString(5);
-	        st.close(); 
+			if (rs.next()) {
+				int no = rs.getInt(1);
+				String name = rs.getString(2);
+				String gender = rs.getString(3);
+				String join_date = rs.getString(4);
+		        return new UserVo(no, name, email, gender, join_date);
+
+			}
+			st.close();
 	        con.close();
-	        return new UserVo(no, name, email, gender, join_date);
+	        return null;
 
 		} catch (Exception ex) {
 			System.out.print("user dao select error : ");
@@ -109,7 +112,7 @@ public class UserDao {
 		Connection con=null;
 		try {
 			con = DatabaseConnection.initializeDatabase();
-			String s = "select no, name, email, gender, join_date from guestbook order by idguestbook";
+			String s = "select no, name, email, gender, join_date from user order by join_date";
 	        PreparedStatement st = con.prepareStatement(s); 
 	        ResultSet rs = st.executeQuery(); 
 	        List<UserVo> res = new ArrayList<UserVo>();

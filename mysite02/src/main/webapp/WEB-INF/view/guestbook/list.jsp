@@ -18,7 +18,7 @@
 			<div id="guestbook">
 				<form action="/mysite02/guestbook/add" method="post">
 					<input type="hidden" name="a" value="insert">
-					<table>
+					<table border=1 width=500>
 						<tr>
 							<td>이름</td>
 							<td><input type="text" name="name"></td>
@@ -36,7 +36,7 @@
 				<ul>
 				<% for(GuestVo g : guests) {%>
 					<li>					
-						<table>
+						<table width=400>
 							<tr>
 								<td>[<%= g.getNo() %>]</td>
 								<td><%= g.getName() %></td>

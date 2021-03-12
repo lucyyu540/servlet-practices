@@ -9,7 +9,7 @@
 	<c:choose>
 		<c:when test="${user == null }">
 			<li><a href="/mysite02/user/loginform">로그인</a><li>
-			<li><a href="${pageContext.servletContext.contextPath}/user/joinform">회원가입</a><li>
+			<li><a href="/mysite02/user/joinform">회원가입</a><li>
 		</c:when>
 		<c:otherwise>
 			<li><a href="/mysite02/user/updateform">회원정보수정</a><li>

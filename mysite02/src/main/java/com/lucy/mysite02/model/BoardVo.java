@@ -7,7 +7,7 @@ public class BoardVo {
 	private String title;
 	private String content;
 	private String reg_date;
-
+	public BoardVo() {}
 	public BoardVo(int authorNo, String title, String content) {
 		this.setAuthorNo(authorNo);
 		this.title = title;

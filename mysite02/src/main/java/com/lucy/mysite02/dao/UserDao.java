@@ -134,5 +134,30 @@ public class UserDao {
 			return null;
 		}
 	}
+	public UserVo findByNo(int no) {
+		Connection con=null;
+		try {
+			con = DatabaseConnection.initializeDatabase();
+			String s = "select name, email, gender, join_date from user where no=?";
+	        PreparedStatement st = con.prepareStatement(s); 
+	        st.setInt(1, no);
+	        ResultSet rs = st.executeQuery(); 
+			if (rs.next()) {
+				String name = rs.getString(1);
+				String email = rs.getString(2);
+				String gender = rs.getString(3);
+				String join_date = rs.getString(4);
+		        return new UserVo(no, name, email, gender, join_date);
+			}
+			st.close();
+	        con.close();
+	        return null;
+
+		} catch (Exception ex) {
+			System.out.print("user dao select by no error : ");
+			ex.printStackTrace();
+			return null;
+		}
+	}
 
 }

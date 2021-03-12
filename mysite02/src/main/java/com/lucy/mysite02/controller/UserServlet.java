@@ -43,7 +43,8 @@ public class UserServlet extends HttpServlet {
 		else if (action.equals("loginform")) {
 			request.getRequestDispatcher("/WEB-INF/view/user/loginform.jsp").forward(request, response);
 			
-		} else if (action.equals("login")) {
+		} 
+		else if (action.equals("login")) {
 			String email = request.getParameter("email");
 			String pw = request.getParameter("password");
 			UserVo u = new UserDao().select(email, pw);
@@ -59,6 +60,28 @@ public class UserServlet extends HttpServlet {
 
 		} 
 		else if (action.equals("updateform")) {
+			//access control
+			HttpSession session = request.getSession();
+			if(session != null && session.getAttribute("user")!= null) {
+				UserVo user = (UserVo) session.getAttribute("user");
+				UserVo uservo = new UserDao().findByNo(user.getNo());
+				request.setAttribute("uservo", uservo);
+				request.getRequestDispatcher("/WEB-INF/view/user/updateform.jsp").forward(request, response);
+
+			}
+			else response.sendRedirect(request.getContextPath());
+		} 
+		else if (action.equals("update")) {
+			//access control
+			HttpSession session = request.getSession();
+			if(session != null && session.getAttribute("user")!= null) {
+				UserVo user = (UserVo) session.getAttribute("user");
+				UserVo uservo = new UserDao().findByNo(user.getNo());
+				request.setAttribute("uservo", uservo);
+				request.getRequestDispatcher("/WEB-INF/view/user/updateform.jsp").forward(request, response);
+
+			}
+			else response.sendRedirect(request.getContextPath());
 		} 
 		else if (action.equals("logout")) {
 			HttpSession session = request.getSession();

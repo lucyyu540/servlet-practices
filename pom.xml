@@ -13,6 +13,7 @@
 		<module>emaillist01</module>
 		<module>guestbook01</module>
 		<module>mysite02</module>
+		<module>jstlel</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

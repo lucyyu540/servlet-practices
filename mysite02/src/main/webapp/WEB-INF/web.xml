@@ -38,6 +38,7 @@
 		<url-pattern>/user/joinsuccess</url-pattern>
 		<url-pattern>/user/logout</url-pattern>
 		<url-pattern>/user/updateform</url-pattern>
+		<url-pattern>/user/update</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<description></description>

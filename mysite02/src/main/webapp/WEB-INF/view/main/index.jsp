@@ -16,12 +16,11 @@
 		<div id="wrapper">
 			<div id="content">
 				<div id="site-introduction">
-					<img id="profile"
-						src="<%=request.getContextPath()%>/assets/images/profile.jpg">
-						<%if(user!= null) { %>
+					<img id="profile" src="<%=request.getContextPath()%>/assets/images/profile.jpg">
+					<%if(user!= null) { %>
 					<h2>
 						안녕하세요.
-						<%=user.getName()%>의 mysite에 오신 것을
+						${user.name}의 mysite에 오신 것을
 						환영합니다.
 					</h2>
 					<%} %>

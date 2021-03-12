@@ -7,7 +7,10 @@ public class UserVo {
 	private String password;
 	private String join_date;
 	private int no;
-	
+	public UserVo(int no, String name) {
+		this.no = no;
+		this.name = name;
+	}
 	public UserVo(int no, String name, String email, String gender, String join_date) {
 		this.no = no;
 		this.name = name;

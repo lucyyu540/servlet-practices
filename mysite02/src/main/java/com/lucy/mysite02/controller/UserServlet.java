@@ -64,7 +64,7 @@ public class UserServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			if(session != null && session.getAttribute("user")!= null) {
 				UserVo user = (UserVo) session.getAttribute("user");
-				UserVo uservo = new UserDao().findByNo(user.getNo());
+				UserVo uservo = new UserDao().select(user.getNo());
 				request.setAttribute("uservo", uservo);
 				request.getRequestDispatcher("/WEB-INF/view/user/updateform.jsp").forward(request, response);
 
@@ -76,7 +76,7 @@ public class UserServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			if(session != null && session.getAttribute("user")!= null) {
 				UserVo user = (UserVo) session.getAttribute("user");
-				UserVo uservo = new UserDao().findByNo(user.getNo());
+				UserVo uservo = new UserDao().select(user.getNo());
 				request.setAttribute("uservo", uservo);
 				request.getRequestDispatcher("/WEB-INF/view/user/updateform.jsp").forward(request, response);
 

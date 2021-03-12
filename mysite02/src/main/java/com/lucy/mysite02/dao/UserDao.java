@@ -84,7 +84,7 @@ public class UserDao {
 		Connection con=null;
 		try {
 			con = DatabaseConnection.initializeDatabase();
-			String s = "select no, name, gender, join_date from user where email=? and password = ?";
+			String s = "select no, name from user where email=? and password = ?";
 	        PreparedStatement st = con.prepareStatement(s); 
 	        st.setString(1, email);
 	        st.setString(2, password);
@@ -92,9 +92,7 @@ public class UserDao {
 			if (rs.next()) {
 				int no = rs.getInt(1);
 				String name = rs.getString(2);
-				String gender = rs.getString(3);
-				String join_date = rs.getString(4);
-		        return new UserVo(no, name, email, gender, join_date);
+		        return new UserVo(no, name);
 
 			}
 			st.close();
@@ -134,7 +132,7 @@ public class UserDao {
 			return null;
 		}
 	}
-	public UserVo findByNo(int no) {
+	public UserVo select(int no) {
 		Connection con=null;
 		try {
 			con = DatabaseConnection.initializeDatabase();

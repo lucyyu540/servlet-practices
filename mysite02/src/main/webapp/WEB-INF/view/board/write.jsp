@@ -12,7 +12,7 @@
 		<jsp:include page="/WEB-INF/view/includes/header.jsp" />
 		<div id="content">
 			<div id="board">
-				<form class="board-form" method="post" action="/board">
+				<form class="board-form" method="post" action="/board/add">
 					<input type = "hidden" name = "a" value="write">
 					<table class="tbl-ex">
 						<tr>

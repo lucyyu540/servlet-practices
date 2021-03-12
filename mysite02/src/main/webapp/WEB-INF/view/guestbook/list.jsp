@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.lucy.mysite02.model.GuestVo" import="java.util.List"%>
-    <%
-    List<GuestVo> guests = (List<GuestVo>) request.getAttribute("guests");
-    %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <title>mysite</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link href="<%=request.getContextPath()%>/assets/css/main.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.servletContext.contextPath}/assets/css/main.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div id="container">
@@ -34,21 +35,21 @@
 					</table>
 				</form>
 				<ul>
-				<% for(GuestVo g : guests) {%>
-					<li>					
-						<table width=400>
-							<tr>
-								<td>[<%= g.getNo() %>]</td>
-								<td><%= g.getName() %></td>
-								<td><%= g.getReg_date() %></td>
-								<td><a href="/mysite02/guestbook/deleteform?no=<%=g.getNo()%>">삭제</a></td>
-							</tr>
-							<tr>
-								<td colspan=4><%= g.getContents() %><br></td>
-							</tr>
-						</table> <br>
-					</li>
-					<%} %>
+					<c:forEach items='${guests}' var='g' varStatus='status'>
+						<li>					
+							<table width=400>
+								<tr>
+									<td>[${status.index+1}]</td>
+									<td>${g.name}</td>
+									<td>${g.reg_date}</td>
+									<td><a href="/mysite02/guestbook/deleteform?no=${g.no}">삭제</a></td>
+								</tr>
+								<tr>
+									<td colspan=4>${g.contents}<br></td>
+								</tr>
+							</table> <br>
+						</li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>

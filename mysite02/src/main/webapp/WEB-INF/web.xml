@@ -58,10 +58,16 @@
 		<description></description>
 		<display-name>BoardServlet</display-name>
 		<servlet-name>BoardServlet</servlet-name>
-		<servlet-class>com.lucy.mysite02.controller.BoardServlett</servlet-class>
+		<servlet-class>com.lucy.mysite02.controller.BoardServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>BoardServlet</servlet-name>
 		<url-pattern>/board</url-pattern>
+		<url-pattern>/board/modifyform</url-pattern>
+		<url-pattern>/board/modify</url-pattern>
+		<url-pattern>/board/addform</url-pattern>
+		<url-pattern>/board/add</url-pattern>
+		<url-pattern>/board/view</url-pattern>
+		
 	</servlet-mapping>
 </web-app>

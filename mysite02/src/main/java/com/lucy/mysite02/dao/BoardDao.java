@@ -148,10 +148,11 @@ public class BoardDao {
 	public boolean update(BoardVo b) {
 		try {
 			Connection con = DatabaseConnection.initializeDatabase();
-			String s = "update board set title = ?, content = ?";
+			String s = "update board set title = ?, content = ? where no = ?";
 	        PreparedStatement st = con.prepareStatement(s); 
 	        st.setString(1, b.getTitle()); 
 	        st.setString(2, b.getContent());
+	        st.setInt(3, b.getNo());
 	        
 	        int r = st.executeUpdate(); 
 	        st.close(); 

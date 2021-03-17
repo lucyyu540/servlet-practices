@@ -19,7 +19,7 @@
 					<tr>
 						<th colspan="2">글보기</th>
 					</tr>
-					<c:if test="${board.title != null}">
+					<c:if test="${board.depth == 1}">
 						<tr>
 							<td class="label">제목</td>
 							<td>${board.title}</td>

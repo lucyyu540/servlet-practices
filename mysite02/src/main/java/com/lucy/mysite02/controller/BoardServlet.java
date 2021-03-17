@@ -31,6 +31,8 @@ public class BoardServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/view/board/view.jsp").forward(request, response);;
 		}
 		else if(action.equals("modifyform")) {//guestbook/deleteform
+			int no = Integer.parseInt(request.getParameter("no"));
+			request.setAttribute("board", new BoardDao().select(no));
 			request.getRequestDispatcher("/WEB-INF/view/board/modify.jsp").forward(request, response);;
 		}
 		else if(action.equals("modify")) {//guestbook/delete

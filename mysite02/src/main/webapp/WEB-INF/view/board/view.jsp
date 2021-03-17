@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,24 +19,30 @@
 					<tr>
 						<th colspan="2">글보기</th>
 					</tr>
-					<tr>
-						<td class="label">제목</td>
-						<td>제목입니다.</td>
-					</tr>
+					<c:if test="${board.title != null}">
+						<tr>
+							<td class="label">제목</td>
+							<td>${board.title}</td>
+						</tr>
+					</c:if>
 					<tr>
 						<td class="label">내용</td>
 						<td>
 							<div class="view-content">
-								내용 1입니다.<br>
-								내용 2입니다.<br>
-								내용 3입니다.
+								${board.content}
 							</div>
 						</td>
 					</tr>
 				</table>
 				<div class="bottom">
+				
 					<a href="">글목록</a>
-					<a href="">글수정</a>
+					<c:if test="${user.no == board.authorNo }">
+						<a href="/mysite02/board/modifyform?no=${board.no}">글수정</a>
+					</c:if>
+					<c:if test="${user != null}">
+						<a href="/mysite02/board/addform?g_no=${board.g_no}&o_no=${board.o_no+1}&depth=${board.depth+1}">답글</a>
+					</c:if>
 				</div>
 			</div>
 		</div>

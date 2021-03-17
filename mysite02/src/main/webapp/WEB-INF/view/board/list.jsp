@@ -29,19 +29,39 @@
 						<th>작성일</th>
 						<th>&nbsp;</th>
 					</tr>
-					<c:forEach items='${boards}' var='b' varStatus='status'>
+					<c:forEach items='${boards}' var='b' varStatus='status'>					
 						<tr>
-							<td>${status.index+1}</td>
-							<td><a href="/mysite02/board/view?${b.no}">${b.title}</a></td>
+							<td >${b.no}</td>
+							<td style="text-align:left; padding-left:${(b.depth-1)*20}px">
+							<a href="/mysite02/board/view?no=${b.no}">${b.title}</a>
+							<c:if test="${b.title==null }">
+								<img src="${pageContext.request.contextPath }/assets/images/reply.png" />
+								<a href="/mysite02/board/view?no=${b.no}">${b.content}</a>
+							</c:if>
+							</td>
+							
 							<td>${b.author}</td>
-							<td>3{b.count}</td>
+							<td>${b.count}</td>
 							<td>${b.reg_date}</td>
 							<c:if test="${user.no == b.authorNo }">
-								<td><a href="/mysite02/board/delete" class="del">삭제</a></td>
+								<td><a href="/mysite02/board/delete?no=${b.no}" class="del">삭제</a></td>
 							</c:if>
 						</tr>
 					</c:forEach>				
 				</table>
+				<!-- pager 추가 -->
+				<div class="pager">
+					<ul>
+						<li><a href="">◀</a></li>
+						<li class="selected"><a href="/mysite02/board?p=1">1</a></li>
+						<li><a href="/mysite02/board?p=2">3</a></li>
+						<li><a href="/mysite02/board?p=3">4</a></li>
+						<li>5</li>
+						<li>6</li>
+						<li><a href="">▶</a></li>
+					</ul>
+				</div>					
+				<!-- pager 추가 -->	
 				<div class="bottom">
 					<c:if test="${user != null}">
 						<a href="/mysite02/board/addform" id="new-book">글쓰기</a>

@@ -1,13 +1,27 @@
 package com.lucy.mysite02.model;
 
 public class BoardVo {
-	private int no;
-	private int authorNo;
-	private String author;
+	@Override
+	public String toString() {
+		return "BoardVo [no=" + no + ", g_no=" + g_no + ", o_no=" + o_no + ", depth=" + depth + ", authorNo=" + authorNo
+				+ ", author=" + author + ", title=" + title + ", content=" + content + ", reg_date=" + reg_date
+				+ ", count=" + count + "]";
+	}
+	private int no;//board no
+	private int g_no;
+	private int o_no;
+	private int depth;
+	
+	private int authorNo;//user no
+	private String author;//name
+	
+	
 	private String title;
 	private String content;
 	private String reg_date;
+	private int count; 
 	public BoardVo() {}
+	/*CONSTRUCTORS*/
 	public BoardVo(int authorNo, String title, String content) {
 		this.setAuthorNo(authorNo);
 		this.title = title;
@@ -29,6 +43,25 @@ public class BoardVo {
 		this.title = title;
 		this.content = content;
 		this.reg_date = date;
+	}
+	/*GETTER SETTER*/
+	public int getG_no() {
+		return g_no;
+	}
+	public void setG_no(int g_no) {
+		this.g_no = g_no;
+	}
+	public int getO_no() {
+		return o_no;
+	}
+	public void setO_no(int o_no) {
+		this.o_no = o_no;
+	}
+	public int getDepth() {
+		return depth;
+	}
+	public void setDepth(int depth) {
+		this.depth = depth;
 	}
 	public int getNo() {
 		return no;
@@ -72,6 +105,12 @@ public class BoardVo {
 	}
 	public void setAuthorNo(int authorNo) {
 		this.authorNo = authorNo;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 }

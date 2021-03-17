@@ -12,9 +12,25 @@ import javax.servlet.http.HttpServletResponse;
 
 public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	@Override
+	public void init() throws ServletException {
+		System.out.println("init() called");
+		System.out.println(this.getServletConfig().getInitParameter("config"));
+		super.init();
+	}
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("service() called");
+		super.service(req, resp);
+	}
+	@Override
+	public void destroy() {
+		System.out.println("destroy() called");
+		super.destroy();
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		System.out.println("doget() called");
 		int visitCount = 0;
 		// read cookies
 		Cookie[] cookies = request.getCookies();

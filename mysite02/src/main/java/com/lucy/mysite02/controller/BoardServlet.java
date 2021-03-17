@@ -27,8 +27,7 @@ public class BoardServlet extends HttpServlet {
 		if(action.equals("view")) {//guestbook/deleteform
 			int no = Integer.parseInt(request.getParameter("no"));
 			new BoardDao().updateCount(no);//조회수 ++
-			BoardVo board = new BoardDao().select(no);
-			request.getSession().setAttribute("board", board);
+			request.setAttribute("board", new BoardDao().select(no));
 			request.getRequestDispatcher("/WEB-INF/view/board/view.jsp").forward(request, response);;
 		}
 		else if(action.equals("modifyform")) {//guestbook/deleteform
@@ -37,12 +36,15 @@ public class BoardServlet extends HttpServlet {
 		else if(action.equals("modify")) {//guestbook/delete
 			//read from request
 			int id = Integer.parseInt(request.getParameter("no"));
-			String pw = request.getParameter("password");
-			System.out.println(id + " " + pw);
-			//deleteing from db
-			new GuestBookDao().delete(id, pw);
+			String title = request.getParameter("title");
+			String content = request.getParameter("content");
+			BoardVo b = new BoardVo();
+			b.setNo(id);
+			b.setTitle(title);
+			b.setContent(content);
+			new BoardDao().update(b);
 			//redirect
-			response.sendRedirect(request.getContextPath()+"/guestbook");
+			response.sendRedirect(request.getContextPath()+"/board");
 
 		}
 		else if(action.equals("addform")) {//board/addform
@@ -55,10 +57,17 @@ public class BoardServlet extends HttpServlet {
 			int no = u.getNo();
 			String title = request.getParameter("title");
 			String content = request.getParameter("content");
+			int g_no = request.getParameter("g_no").equals("") ? 0 : Integer.parseInt(request.getParameter("g_no"));
+			int o_no =  request.getParameter("o_no").equals("") ? 1 : Integer.parseInt(request.getParameter("o_no"));
+			int depth =  request.getParameter("depth").equals("") ? 1 : Integer.parseInt(request.getParameter("depth"));
+			BoardVo b = new BoardVo(no, title, content);
+			b.setG_no(g_no);
+			b.setO_no(o_no);
+			b.setDepth(depth);
 			//saving to db
-			new BoardDao().create(new BoardVo(no, title, content));
+			new BoardDao().create(b);
 			//redirect
-			response.sendRedirect(request.getContextPath()+"/guestbook");
+			response.sendRedirect(request.getContextPath()+"/board");
 		}
 		else {// /guestbook
 			List<BoardVo> l = new BoardDao().selectAll();

@@ -41,7 +41,7 @@
 						<a href="/mysite02/board/modifyform?no=${board.no}">글수정</a>
 					</c:if>
 					<c:if test="${user != null}">
-						<a href="/mysite02/board/addform?g_no=${board.g_no}&o_no=${board.o_no+1}&depth=${board.depth+1}">답글</a>
+						<a href="/mysite02/board/addform?g_no=${board.g_no}&o_no=${board.o_no}&depth=${board.depth+1}">답글</a>
 					</c:if>
 				</div>
 			</div>

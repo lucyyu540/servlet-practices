@@ -16,21 +16,15 @@ public class BoardDao {
 			Connection con = DatabaseConnection.initializeDatabase();
 			String s;
 			PreparedStatement st;
-			//update order number 
-			if(b.getG_no()!=0) {
-				s = "select ifnull(max(o_no),0) from board where g_no=?";
-				st = con.prepareStatement(s);
-				st.setInt(1, b.getG_no());
-				ResultSet rs = st.executeQuery();
-				if(rs.next()) b.setO_no(rs.getInt(1)+1);
-				
+			//update order numbers 
+			if(b.getG_no()!=0) {//is a reply
 				s="update board set o_no=o_no+1 where g_no = ? and o_no >= ?";
 				st = con.prepareStatement(s);
 				st.setInt(1, b.getG_no());
 				st.setInt(2, b.getO_no());
 				st.executeUpdate();
 			} 
-			else {
+			else {//is a new post
 				s = "select ifnull(max(g_no),0) from board";
 				st = con.prepareStatement(s);
 				ResultSet rs = st.executeQuery();
@@ -107,7 +101,7 @@ public class BoardDao {
 			con = DatabaseConnection.initializeDatabase();
 			String s = "select b.no, b.author, u.name, b.title, b.content, b.reg_date, "
 			+"b.count, b.g_no, b.o_no, b.depth "+
-			"from board b inner join user u on b.author = u.no order by g_no desc, o_no asc";
+			"from board b inner join user u on b.author = u.no order by g_no desc, o_no desc";
 	        PreparedStatement st = con.prepareStatement(s); 
 	        ResultSet rs = st.executeQuery(); 
 	        List<BoardVo> res = new ArrayList<BoardVo>();

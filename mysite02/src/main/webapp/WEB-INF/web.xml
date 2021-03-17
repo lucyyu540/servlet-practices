@@ -68,6 +68,8 @@
     <url-pattern>/board/addform</url-pattern>
     <url-pattern>/board/add</url-pattern>
     <url-pattern>/board/view</url-pattern>
+    <url-pattern>/board/delete</url-pattern>
+    
   </servlet-mapping>
   <filter>
     <display-name>EncodingFilter</display-name>

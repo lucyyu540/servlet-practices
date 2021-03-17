@@ -150,24 +150,16 @@ public class BoardDao {
 	        st.setInt(1, g_no);
 	        st.setInt(2, o_no);
 	        ResultSet rs = st.executeQuery(); 
-	        int prevO = o_no;
 	        while(rs.next()) {
-	        	int o = rs.getInt(1);
-	        	int depth = rs.getInt(2);
-	        	//--- <-- o_no(a)
-	        	//	--- 
-	        	//  ---
-	        	//	   ---
-	        	//	--- <-- return(a)+1
-	        	
-	        	if(depth < d) return prevO+1;
-	        	prevO = o;
+	        	int depth = rs.getInt(2);	        	
+	        	if(depth < d) break;
+	        	o_no = rs.getInt(1);
 	        	
 	        }
 	        st.close(); 
 	        con.close();
 	        
-	        return prevO+1;
+	        return o_no+1;
 
 		} catch (Exception ex) {
 			System.out.println("board dao select order error : ");
@@ -220,10 +212,13 @@ public class BoardDao {
 	public boolean delete(int no) {
 		try {
 			Connection con = DatabaseConnection.initializeDatabase();
-			String s = "delete from board where no=?";
+			BoardVo b = select(no);
+			int deleteUpTo = selectOrder(b.getG_no(), b.getO_no(), b.getDepth()+1);
+			String s = "delete from board where g_no=? and  o_no >= ? and o_no < ?";
 	        PreparedStatement st = con.prepareStatement(s); 
-	        st.setInt(1, no); 
-	        
+	        st.setInt(1, b.getG_no());
+	        st.setInt(2, b.getO_no()); 
+	        st.setInt(3, deleteUpTo);
 	        int r = st.executeUpdate(); 
 	        st.close(); 
 	        con.close();

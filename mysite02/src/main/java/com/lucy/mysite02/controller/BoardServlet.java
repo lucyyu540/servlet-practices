@@ -71,6 +71,11 @@ public class BoardServlet extends HttpServlet {
 			//redirect
 			response.sendRedirect(request.getContextPath()+"/board");
 		}
+		else if(action.equals("delete")) {
+			int no = Integer.parseInt(request.getParameter("no"));
+			new BoardDao().delete(no);
+			response.sendRedirect(request.getContextPath()+"/board");
+		}
 		else {// /guestbook
 			List<BoardVo> l = new BoardDao().selectAll();
 			request.setAttribute("boards", l);

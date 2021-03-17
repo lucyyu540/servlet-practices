@@ -18,6 +18,8 @@ public class BoardDao {
 			PreparedStatement st;
 			//update order numbers 
 			if(b.getG_no()!=0) {//is a reply
+				b.setO_no(selectOrder(b.getG_no(), b.getO_no(), b.getDepth()));
+				System.out.println(b.getO_no());
 				s="update board set o_no=o_no+1 where g_no = ? and o_no >= ?";
 				st = con.prepareStatement(s);
 				st.setInt(1, b.getG_no());
@@ -101,7 +103,7 @@ public class BoardDao {
 			con = DatabaseConnection.initializeDatabase();
 			String s = "select b.no, b.author, u.name, b.title, b.content, b.reg_date, "
 			+"b.count, b.g_no, b.o_no, b.depth "+
-			"from board b inner join user u on b.author = u.no order by g_no desc, o_no desc";
+			"from board b inner join user u on b.author = u.no order by g_no desc, o_no asc";
 	        PreparedStatement st = con.prepareStatement(s); 
 	        ResultSet rs = st.executeQuery(); 
 	        List<BoardVo> res = new ArrayList<BoardVo>();
@@ -137,6 +139,40 @@ public class BoardDao {
 			System.out.println("board dao selectAll error : ");
 			ex.printStackTrace();
 			return null;
+		}
+	}
+	public int selectOrder(int g_no, int o_no, int d) {
+		Connection con=null;
+		try {
+			con = DatabaseConnection.initializeDatabase();
+			String s = "select o_no, depth from board where g_no=? and o_no > ? order by o_no";
+	        PreparedStatement st = con.prepareStatement(s); 
+	        st.setInt(1, g_no);
+	        st.setInt(2, o_no);
+	        ResultSet rs = st.executeQuery(); 
+	        int prevO = o_no;
+	        while(rs.next()) {
+	        	int o = rs.getInt(1);
+	        	int depth = rs.getInt(2);
+	        	//--- <-- o_no(a)
+	        	//	--- 
+	        	//  ---
+	        	//	   ---
+	        	//	--- <-- return(a)+1
+	        	
+	        	if(depth < d) return prevO+1;
+	        	prevO = o;
+	        	
+	        }
+	        st.close(); 
+	        con.close();
+	        
+	        return prevO+1;
+
+		} catch (Exception ex) {
+			System.out.println("board dao select order error : ");
+			ex.printStackTrace();
+			return 0;
 		}
 	}
 	public boolean update(BoardVo b) {

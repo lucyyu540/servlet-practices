@@ -16,7 +16,7 @@
 
 		<div id="content">
 			<div id="board">
-				<form id="search_form" action="/mysite02/board/search" method="post">
+				<form id="search_form" action="/mysite02/board" method="post">
 					<input type="text" id="kwd" name="msg" value="">
 					<input type="submit" value="찾기">
 				</form>
@@ -54,34 +54,41 @@
 					<ul>
 						<c:choose>
 							<c:when test="${ null== param.p || param.p == 1}" >
-								<li><a href="/mysite02/board?p=1">◀</a></li>
+								<li><a href="/mysite02/board?p=1&msg=${msg}">◀</a></li>
 							</c:when>
 							<c:otherwise>
-								<li><a href="/mysite02/board?p=${param.p-1 }">◀</a></li>
+								<li><a href="/mysite02/board?p=${param.p-1 }&msg=${msg}">◀</a></li>
 							</c:otherwise>
 						</c:choose>		
 						<c:forEach begin="1" end="${pagesCount}" varStatus="loop">
 							<c:choose>
 								<c:when test="${ null== param.p && loop.index == 1}" >
-									<li class="selected"><a href="/mysite02/board?p=1">1</a></li>
+									<li class="selected"><a href="/mysite02/board?p=1&msg=${msg}">1</a></li>
 								</c:when>
 								<c:when test="${ param.p == loop.index}" >
-									<li class="selected"><a href="/mysite02/board?p=${loop.index}">${loop.index}</a></li>
+									<li class="selected"><a href="/mysite02/board?p=${loop.index}&msg=${msg}">${loop.index}</a></li>
 								</c:when>
 								<c:otherwise>
-									<li><a href="/mysite02/board?p=${loop.index}">${loop.index}</a></li>
+									<li><a href="/mysite02/board?p=${loop.index}&msg=${msg}">${loop.index}</a></li>
 								</c:otherwise>
 							</c:choose>						
 						</c:forEach>
 						<c:choose>
-							<c:when test="${ null== param.p && 1 < pagesCount}" >
-								<li><a href="/mysite02/board?p=${2}">▶</a></li>
+							<c:when test="${ null== param.p}" >
+								<c:choose>
+									<c:when test="${ pagesCount > 1}" >
+										<li><a href="/mysite02/board?p=${2}&msg=${msg}">▶</a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a href="/mysite02/board?p=1&msg=${msg}">▶</a></li>
+									</c:otherwise>
+							</c:choose>		
 							</c:when>
 							<c:when test="${ param.p < pagesCount}" >
-								<li><a href="/mysite02/board?p=${param.p+1 }">▶</a></li>
+								<li><a href="/mysite02/board?p=${param.p+1 }&msg=${msg}">▶</a></li>
 							</c:when>
 							<c:otherwise>
-								<li><a href="/mysite02/board?p=${param.p}">▶</a></li>
+								<li><a href="/mysite02/board?p=${param.p}&msg=${msg}">▶</a></li>
 							</c:otherwise>
 						</c:choose>		
 					</ul>

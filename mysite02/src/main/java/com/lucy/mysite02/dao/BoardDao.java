@@ -148,6 +148,57 @@ public class BoardDao {
 			return null;
 		}
 	}
+	public List<BoardVo> selectAll(String msg, int page) {//page
+		Connection con=null;
+		try {
+			int offSet = (page-1)*linesPerPage;
+			con = DatabaseConnection.initializeDatabase();
+			String s = "select b.no, b.author, u.name, b.title, b.content, b.reg_date, "
+			+"b.count, b.g_no, b.o_no, b.depth "+
+			"from board b inner join user u on b.author = u.no "+
+			"where title like ? or content like ? "
+			+"order by g_no desc, o_no asc limit ?, ?";
+	        PreparedStatement st = con.prepareStatement(s); 
+	        st.setString(1, "%"+msg+"%");
+	        st.setString(2, "%"+msg+"%");
+	        st.setInt(3, offSet);
+	        st.setInt(4, linesPerPage);
+	        ResultSet rs = st.executeQuery(); 
+	        List<BoardVo> res = new ArrayList<BoardVo>();
+	        while(rs.next()) {
+	        	int no = rs.getInt(1);
+	        	int authorNo = rs.getInt(2);
+	        	String author = rs.getString(3);
+	        	String title = rs.getString(4);
+	        	String content = rs.getString(5);
+	        	String date = rs.getString(6);
+	        	int count = rs.getInt(7);
+	        	int g_no = rs.getInt(8);
+	        	int o_no = rs.getInt(9);
+	        	int depth = rs.getInt(10);
+	        	BoardVo b = new BoardVo();
+	        	b.setNo(no);
+	        	b.setAuthorNo(authorNo);
+	        	b.setAuthor(author);
+	        	b.setTitle(title);
+	        	b.setContent(content);
+	        	b.setReg_date(date);
+	        	b.setCount(count);
+	        	b.setG_no(g_no);
+	        	b.setO_no(o_no);
+	        	b.setDepth(depth);
+	        	res.add(b);
+	        }
+	        st.close(); 
+	        con.close();
+	        return res;
+
+		} catch (Exception ex) {
+			System.out.println("board dao selectAll error : ");
+			ex.printStackTrace();
+			return null;
+		}
+	}
 	/**
 	 * --- <-- start o_no
 	 * 	  ---
@@ -187,6 +238,26 @@ public class BoardDao {
 			con = DatabaseConnection.initializeDatabase();
 			String s = "select count(*) from board";
 	        PreparedStatement st = con.prepareStatement(s); 
+	        ResultSet rs = st.executeQuery(); 
+	        if (rs.next()) return rs.getInt(1);
+	        st.close(); 
+	        con.close();
+	        return 0;
+
+		} catch (Exception ex) {
+			System.out.println("board dao select row count error : ");
+			ex.printStackTrace();
+			return 0;
+		}
+	}
+	public int selectRowCount(String msg) {
+		Connection con=null;
+		try {
+			con = DatabaseConnection.initializeDatabase();
+			String s = "select count(*) from board where title like ? or content like ?";
+	        PreparedStatement st = con.prepareStatement(s); 
+	        st.setString(1, "%"+msg+"%");
+	        st.setString(2, "%"+msg+"%");
 	        ResultSet rs = st.executeQuery(); 
 	        if (rs.next()) return rs.getInt(1);
 	        st.close(); 

@@ -69,6 +69,7 @@
     <url-pattern>/board/add</url-pattern>
     <url-pattern>/board/view</url-pattern>
     <url-pattern>/board/delete</url-pattern>
+    <url-pattern>/board/search</url-pattern>
     
   </servlet-mapping>
   <filter>

@@ -76,10 +76,24 @@ public class BoardServlet extends HttpServlet {
 			new BoardDao().delete(no);
 			response.sendRedirect(request.getContextPath()+"/board");
 		}
+		else if(action.equals("search")) {
+			String msg = request.getParameter("msg");
+			int p = request.getParameter("p") == null ? 1 : Integer.parseInt("p");
+			
+			List<BoardVo> l  = new BoardDao().selectAll(msg, p);
+			int pagesCount = new BoardDao().selectRowCount(msg);
+			
+			request.setAttribute("boards", l);
+			request.setAttribute("pagesCount", pagesCount);
+			//forward
+			request.getRequestDispatcher("/WEB-INF/view/board/list.jsp").forward(request, response);;
+
+		}
 		else {// /guestbook
 			BoardDao dao = new BoardDao();
 			int page = request.getParameter("p") == null ? 1 : Integer.parseInt(request.getParameter("p"));
 			int pagesCount = (dao.selectRowCount() / dao.linesPerPage) + 1 ;
+			
 			List<BoardVo> l = new BoardDao().selectAll(page);
 			request.setAttribute("boards", l);
 			request.setAttribute("pagesCount", pagesCount);

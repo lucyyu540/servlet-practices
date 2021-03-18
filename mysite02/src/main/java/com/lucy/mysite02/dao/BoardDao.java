@@ -11,28 +11,31 @@ import com.lucy.mysite02.model.BoardVo;
 import com.lucy.mysite02.model.GuestVo;
 
 public class BoardDao {
+	public int linesPerPage = 5;
+
+	/**CREATE-------------------------------------------------------------------------*/
 	public boolean create(BoardVo b) {
 		try {
 			Connection con = DatabaseConnection.initializeDatabase();
 			String s;
 			PreparedStatement st;
-			//update order numbers 
-			if(b.getG_no()!=0) {//is a reply
-				b.setO_no(selectOrder(b.getG_no(), b.getO_no(), b.getDepth()));
-				System.out.println(b.getO_no());
-				s="update board set o_no=o_no+1 where g_no = ? and o_no >= ?";
+			/*REPLY*/
+			if(b.getG_no()!=0) {
+				b.setO_no(selectOrder(b.getG_no(), b.getO_no(), b.getDepth()));//find o_no
+				s="update board set o_no=o_no+1 where g_no = ? and o_no >= ?";//shift 
 				st = con.prepareStatement(s);
 				st.setInt(1, b.getG_no());
 				st.setInt(2, b.getO_no());
 				st.executeUpdate();
 			} 
-			else {//is a new post
-				s = "select ifnull(max(g_no),0) from board";
+			/*POST*/
+			else {
+				s = "select ifnull(max(g_no),0) from board";//find g_no
 				st = con.prepareStatement(s);
 				ResultSet rs = st.executeQuery();
 				if(rs.next()) b.setG_no(rs.getInt(1)+1);
 			}
-			s = "insert into board (author, title, content, g_no, o_no, depth) values(?, ?, ?, ?, ?, ?)";
+			s = "insert into board (author, title, content, g_no, o_no, depth) values(?, ?, ?, ?, ?, ?)";//insert
 	        st = con.prepareStatement(s); 
 
 	        st.setInt(1, b.getAuthorNo() ); 
@@ -55,7 +58,7 @@ public class BoardDao {
 		} 
 		
 	}
-
+	/**READ-------------------------------------------------------------------------*/
 	public BoardVo select(int no) {
 		Connection con=null;
 		try {
@@ -97,14 +100,18 @@ public class BoardDao {
 			return null;
 		}
 	}
-	public List<BoardVo> selectAll() {
+	//LIMIT 1, 2;
+	public List<BoardVo> selectAll(int page) {//page
 		Connection con=null;
 		try {
+			int offSet = (page-1)*linesPerPage;
 			con = DatabaseConnection.initializeDatabase();
 			String s = "select b.no, b.author, u.name, b.title, b.content, b.reg_date, "
 			+"b.count, b.g_no, b.o_no, b.depth "+
-			"from board b inner join user u on b.author = u.no order by g_no desc, o_no asc";
+			"from board b inner join user u on b.author = u.no order by g_no desc, o_no asc limit ?, ?";
 	        PreparedStatement st = con.prepareStatement(s); 
+	        st.setInt(1, offSet);
+	        st.setInt(2, linesPerPage);
 	        ResultSet rs = st.executeQuery(); 
 	        List<BoardVo> res = new ArrayList<BoardVo>();
 	        while(rs.next()) {
@@ -141,6 +148,13 @@ public class BoardDao {
 			return null;
 		}
 	}
+	/**
+	 * --- <-- start o_no
+	 * 	  ---
+	 * 		---
+	 * 	  ---
+	 * --- <-- return new o_no
+	 */
 	public int selectOrder(int g_no, int o_no, int d) {
 		Connection con=null;
 		try {
@@ -167,6 +181,26 @@ public class BoardDao {
 			return 0;
 		}
 	}
+	public int selectRowCount() {
+		Connection con=null;
+		try {
+			con = DatabaseConnection.initializeDatabase();
+			String s = "select count(*) from board";
+	        PreparedStatement st = con.prepareStatement(s); 
+	        ResultSet rs = st.executeQuery(); 
+	        if (rs.next()) return rs.getInt(1);
+	        st.close(); 
+	        con.close();
+	        return 0;
+
+		} catch (Exception ex) {
+			System.out.println("board dao select row count error : ");
+			ex.printStackTrace();
+			return 0;
+		}
+	}
+	
+	/**UPDATE-------------------------------------------------------------------------*/
 	public boolean update(BoardVo b) {
 		try {
 			Connection con = DatabaseConnection.initializeDatabase();
@@ -209,6 +243,15 @@ public class BoardDao {
 		} 
 		
 	}
+	/*DELETE-------------------------------------------------------------------------*/
+	/**
+	 *--- <-- delete this (main)
+	 *  --- <-- delete 
+	 *  --- <-- delete
+	 *     --- <-- delete
+	 *  --- <-- delete
+	 *---
+	 */
 	public boolean delete(int no) {
 		try {
 			Connection con = DatabaseConnection.initializeDatabase();

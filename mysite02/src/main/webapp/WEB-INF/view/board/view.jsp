@@ -36,7 +36,7 @@
 				</table>
 				<div class="bottom">
 				
-					<a href="">글목록</a>
+					<a href="/mysite02/board">글목록</a>
 					<c:if test="${user.no == board.authorNo }">
 						<a href="/mysite02/board/modifyform?no=${board.no}">글수정</a>
 					</c:if>

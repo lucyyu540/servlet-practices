@@ -52,13 +52,38 @@
 				<!-- pager 추가 -->
 				<div class="pager">
 					<ul>
-						<li><a href="">◀</a></li>
-						<li class="selected"><a href="/mysite02/board?p=1">1</a></li>
-						<li><a href="/mysite02/board?p=2">3</a></li>
-						<li><a href="/mysite02/board?p=3">4</a></li>
-						<li>5</li>
-						<li>6</li>
-						<li><a href="">▶</a></li>
+						<c:choose>
+							<c:when test="${ null== param.p || param.p == 1}" >
+								<li><a href="/mysite02/board?p=1">◀</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="/mysite02/board?p=${param.p-1 }">◀</a></li>
+							</c:otherwise>
+						</c:choose>		
+						<c:forEach begin="1" end="${pagesCount}" varStatus="loop">
+							<c:choose>
+								<c:when test="${ null== param.p && loop.index == 1}" >
+									<li class="selected"><a href="/mysite02/board?p=1">1</a></li>
+								</c:when>
+								<c:when test="${ param.p == loop.index}" >
+									<li class="selected"><a href="/mysite02/board?p=${loop.index}">${loop.index}</a></li>
+								</c:when>
+								<c:otherwise>
+									<li><a href="/mysite02/board?p=${loop.index}">${loop.index}</a></li>
+								</c:otherwise>
+							</c:choose>						
+						</c:forEach>
+						<c:choose>
+							<c:when test="${ null== param.p && 1 < pagesCount}" >
+								<li><a href="/mysite02/board?p=${2}">▶</a></li>
+							</c:when>
+							<c:when test="${ param.p < pagesCount}" >
+								<li><a href="/mysite02/board?p=${param.p+1 }">▶</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="/mysite02/board?p=${param.p}">▶</a></li>
+							</c:otherwise>
+						</c:choose>		
 					</ul>
 				</div>					
 				<!-- pager 추가 -->	
